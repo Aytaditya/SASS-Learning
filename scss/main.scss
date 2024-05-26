@@ -1,7 +1,58 @@
-*{
-    margin: 0;
-    padding: 0;
+@import './resets'; // importing resets.scss file
+
+// making variables in scss
+$mt:25px;
+
+//importing variables in scss
+@import './variables';
+
+//making function in scss
+@function weight($weight-name){
+    @return map-get($map: $font-weights, $key: $weight-name);
+
 }
+
+//creating a mixing: to avoid writing same code again and again
+@mixin flex-center($direction){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+//mixin can also be used for light and dark theme 
+@mixin theme($theme){
+    @if $theme == light{
+        background-color: white;
+        color: black;
+    } @else if $theme == dark{
+        background-color: black;
+        color: white;
+    } @else{
+        background-color: gray;
+        color: white;
+    }
+}
+
 body{
-    background-color: red;
+    @include theme(dark);
+    font-weight: weight("bold");
+    color: white;
+    
+}
+
+.main{
+    width: 80%;
+    margin: 0 auto;
+    font-size: $size;
+    p{
+        color: $color1;
+    }
+}
+
+.items-center{
+    
+    @include flex-center(row);
+    margin-top: $mt;
+    font-weight:weight("medium")
 }
